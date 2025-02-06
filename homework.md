@@ -27,6 +27,15 @@ Ep-04:
 - Reading the dynamic routes.
 
 Ep-05:
+- Multiple Route Handlers - Play with Code.
+- next()
+- next function and errors along with res.send()
+- app.use("/route", rH, [rH2, rH3], rH4, rH5)
+- What is middlewares? Why do we need it?
+- How express JS bascially handles requests behind the scenes.
+- Difference between app.use and app.all
+- Write a dummy auth middleware for admin
+- Wrie a dummy auth middleware for all user routes, expect /user/login
 - 
 
 
