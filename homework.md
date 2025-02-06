@@ -12,3 +12,14 @@ Ep-03:
 - Difference between (^ vs ~)
 
 Ep-04:
+- Initialize git
+- .gitignore
+- Create a remote repo on github
+- Push all code to remote origin
+- Why should we push lock-json and .json also?
+- Play with routes and route extensions ex: '/hello', '/', 'hello/2'
+- Order of the routes matters a lot.
+- Install Postman app and make a workspace/collection > test API call
+- Write logic to handle GET, POST, PUT, DELETE API Calls and test them on Postman
+
+
