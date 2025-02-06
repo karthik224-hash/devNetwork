@@ -3,23 +3,19 @@ const { adminAuth, userAuth } = require('./middlewares/auth');
 
 const app = express();
 
-//Handle Auth Middleware for all GET, POST, .. requests
-app.use("/admin", adminAuth);
-
-app.post("/user/login", (req, res) => {
-	res.send("User logged in successfully!!");
-})
-
-app.use("/user", userAuth, (req, res) => {
+app.get("/getUserData", (req, res) => {
+	// Logic of DB call and get the user data
+	throw new Error("dbkiisb");
 	res.send("User Data Sent");
 });
 
-app.get("/admin/getAllData", (req, res) => {
-	res.send("All Data Sent"); 
-});
-
-app.get("/admin/deleteAllData", (req, res) => {
-	res.send("Deleted a user");
+app.use("/", (err, req, res, next) => {
+	if (err) {
+		res.status(500).send("something went wrong");
+	}
+	/**
+	 Use try and catch block also
+	*/
 });
 
 app.listen(7777, () => {
