@@ -48,3 +48,8 @@ Ep-06:
 - Push few documents using API calls from postman
 - Error handling using try catch block
 
+Ep-07:
+- JS object vs JSON (Difference)
+- Add the express.json middleware to your app
+- Make sure signup API dynamic to receive data from the end user.
+
