@@ -38,4 +38,13 @@ Ep-05:
 - Wrie a dummy auth middleware for all user routes, expect /user/login
 - Error Handling using app.use("/", (err, req, res, next))
 
+Ep-06:
+- Create a free cluster on MongoDB official website (Mongo Atlas)
+- Install mongoose library
+- Connect your application to the database "Connection-url"/devNetwork
+- Call the connectDB function and connect to database before starting application on 7777
+- Create a userSchema & user Model
+- Create /signup API to add data to database
+- Push few documents using API calls from postman
+- Error handling using try catch block
 
