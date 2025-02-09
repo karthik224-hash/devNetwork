@@ -70,3 +70,5 @@ Ep-08:
 - Create a custom validate function for gender,
 - Improve the DB schema - PUT all appropriate validations on each field in schema
 - Add timestamps to the user schema
+- Add API level validations on Patch request and Signup post API
+- DATA Sanitizing - Add API validation for each field
