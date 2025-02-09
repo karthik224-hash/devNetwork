@@ -76,3 +76,9 @@ Ep-08:
 - Explore validator library functions and use validator funcs for password, email
 - Never Trust req.body
 
+Ep-09
+- Validate data in Signup API
+- Install bcrypt package.
+- Create a passwordHash using bcrypt.hash and save the user is encrypted password.
+- Create login API
+- Compare passwords and throw errors if email or password is invalid.
