@@ -74,5 +74,5 @@ Ep-08:
 - DATA Sanitizing - Add API validation for each field
 - Install validator
 - Explore validator library functions and use validator funcs for password, email
-
+- Never Trust req.body
 
