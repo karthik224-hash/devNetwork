@@ -81,7 +81,6 @@ app.patch("/user/:userId", async (req, res) => {
 			returnDocument: "after",
 			runValidators: true,
 		});
-		console.log(user);
 		res.send("User updated successfully");
 	} catch (err) {
 		res.status(400).send("UPDATE FAILED: " + err.message);

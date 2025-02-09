@@ -72,3 +72,7 @@ Ep-08:
 - Add timestamps to the user schema
 - Add API level validations on Patch request and Signup post API
 - DATA Sanitizing - Add API validation for each field
+- Install validator
+- Explore validator library functions and use validator funcs for password, email
+
+
