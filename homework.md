@@ -108,3 +108,16 @@ Ep-11
 - Create PATCH /profile/edit
 - Create PATCH /profile/passoword API => forgot password API
 - Make you validate all the data in every POST, PATCH apis
+
+Ep-12
+- Create Connection Request Schema
+- Send Connection Request API
+- Proper validation of Data
+- Think about all corner cases
+- $or query and $and query in MongoDB
+- Read about more logical queries.
+- schema.pre("save") function.
+- Read more about indexes in MongoDB
+- Why do you need index in DB?
+- What is advantages and disadvantages of creating?
+- Read the article about compound indexes.

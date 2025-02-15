@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
 		unique: true,
 		trim: true,
 		validate(value) {
-			if(!validator.isEmail(value)) {
+			if (!validator.isEmail(value)) {
 				throw new Error("Invalid email address" + value);
 			}
 		}
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
 	password: {
 		type: String,
 		required: true,
-		validate(value){
+		validate(value) {
 			if (!validator.isStrongPassword(value)) {
 				throw new Error("Enter a Strong Password" + value);
 			}
@@ -40,8 +40,12 @@ const userSchema = new mongoose.Schema({
 	},
 	gender: {
 		type: String,
+		enum: {
+			values: ["male", "female", "others"],
+			message: `{VALUE} is not a valid gender type`
+		},
 		validate(value) {
-			if(!["male", "female", "others"].includes(value)) {
+			if (!["male", "female", "others"].includes(value)) {
 				throw new Error("Gender data is not valid!!!");
 			}
 		},
@@ -63,11 +67,13 @@ const userSchema = new mongoose.Schema({
 		type: [String],
 	},
 
-  }, 
-  {
-	timestamps: true,
-  }
+},
+	{
+		timestamps: true,
+	}
 );
+
+userSchema.index({ firstName: 1, lastName: 1 });
 
 userSchema.methods.getJWT = async function () {
 	const user = this;
