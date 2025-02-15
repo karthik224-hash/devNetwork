@@ -1,25 +1,24 @@
 const express = require('express');
 const connectDB = require('./config/database');
-const { adminAuth, userAuth } = require('./middlewares/auth');
 const app = express();
 const User = require("./models/user");
 const { validateSignUpData } = require('./utils/validations');
 const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
+const { userAuth } = require('./middlewares/auth');
 
 app.use(express.json());
+app.use(cookieParser());
 
-app.post("/signup", async(req, res) => {
+app.post("/signup", async (req, res) => {
 	try {
-		// Validation of data
 		validateSignUpData(req);
 
 		const { firstName, lastName, emailId, password } = req.body;
 
-		// Encrypt the password
 		const passwordHash = await bcrypt.hash(password, 10);
-		console.log(passwordHash);
 
-		// Creating a new instance of the User Model.
 		const user = new User({
 			firstName,
 			lastName,
@@ -28,7 +27,7 @@ app.post("/signup", async(req, res) => {
 		});
 		await user.save();
 		res.send("User added successfully!");
-	} catch(err) {
+	} catch (err) {
 		res.status(400).send("Error saving the user:" + err.message);
 	}
 });
@@ -41,8 +40,13 @@ app.post("/login", async (req, res) => {
 		if (!user) {
 			throw new Error("EmailID is not present in DB");
 		}
-		const isPasswordValid = bcrypt.compare(password, user.password);
+		const isPasswordValid = await user.validatePassword(password);
 		if (isPasswordValid) {
+			const token = await user.getJWT();
+
+			res.cookie("token", token, {
+				expires: new Date(Date.now() + 8 * 3600000)
+			});
 			res.send("Login Successfull!!!");
 		} else {
 			throw new Error("Invalid credentials");
@@ -50,6 +54,22 @@ app.post("/login", async (req, res) => {
 	} catch (err) {
 		res.status(400).send("ERROR: " + err.message);
 	}
+})
+
+app.get("/profile", userAuth, async (req, res) => {
+	try {
+		const user = req.user;
+		res.send(user);
+	} catch (err) {
+		res.status(400).send("ERROR: " + err.message);
+	}
+})
+
+app.post("/sendConnectionRequest", userAuth, async (req, res) => {
+	// Sending a connection request
+	const user = req.user;
+	console.log("Sending a connection request");
+	res.send(user.firstName + " has sent connection request");
 })
 
 //Get user by email
@@ -112,7 +132,7 @@ app.patch("/user/:userId", async (req, res) => {
 		if (!isUpdateAllowed) {
 			throw new Error("Update is not allowed");
 		}
-		const user = await User.findByIdAndUpdate({_id: userId}, data, {
+		const user = await User.findByIdAndUpdate({ _id: userId }, data, {
 			returnDocument: "after",
 			runValidators: true,
 		});
